@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             holder.bindItem(list!![position])
         }
 
+
     }
 
 

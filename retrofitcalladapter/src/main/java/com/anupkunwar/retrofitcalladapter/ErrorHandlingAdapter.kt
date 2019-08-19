@@ -3,7 +3,6 @@ package com.anupkunwar.retrofitcalladapter
 import okhttp3.Request
 import retrofit2.*
 import java.io.IOException
-import java.lang.Exception
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.concurrent.Executor
@@ -133,9 +132,7 @@ private class MyCallAdapter<T>(private val call: Call<T>, private val callbackEx
     private fun <T> doCallback(callback: MyCallback<T>, response: Response<T>, code: Int) {
         when (code) {
             in 200..299 -> callback.success(response)
-            401 -> {
-                callback.unauthenticated(response)
-            }
+            401 -> callback.unauthenticated(response)
             in 400..499 -> callback.clientError(response)
             in 500..599 -> callback.serverError(response)
             else -> callback.unexpectedError(RuntimeException("Unexpected response $response"))
